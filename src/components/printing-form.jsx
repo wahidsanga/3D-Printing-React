@@ -1,6 +1,4 @@
-"use client";
-
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
 
@@ -10,8 +8,10 @@ import { Upload } from "./ui/upload";
 import { cn } from "../lib/utils";
 import { FormWrapper } from "./form-wrapper";
 import { Input } from "./ui/input";
+import { Select } from "./ui/select";
 import { Label } from "./ui/label";
 import { useNavigate } from "react-router-dom";
+import { materials } from "../constants/data";
 
 export function PrintingForm() {
   const form = useForm({});
@@ -22,6 +22,7 @@ export function PrintingForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = form;
 
@@ -33,9 +34,9 @@ export function PrintingForm() {
         file,
       })
       .then((res) => {
-        const data = res.data;
+        const result = res.data;
         history(
-          `/result?name=${data.name}&quantity=${data.quantity}&mass=${data.stl.weight}`
+          `/result?name=${result.name}&density=${data.density}&mass=${result.stl.weight}&height=${result?.stl?.boundingBox[2]}&boundingBox=${result.stl.boundingBox}`
         );
       })
       .finally(() => setIsLoading(false));
@@ -70,19 +71,21 @@ export function PrintingForm() {
         </FormWrapper>
 
         <FormWrapper>
-          <Label htmlFor="quantity" label="Quantity" />
-          <Input
-            id="quantity"
-            className={cn(errors.name && "border-destructive")}
-            type="text"
-            placeholder="Quantity"
-            autoCorrect="off"
-            {...register("quantity", {
-              required: {
-                value: true,
-                message: "Required",
-              },
-            })}
+          <Label htmlFor={"density"} label={"Material"} />
+          <Controller
+            name="density"
+            control={control}
+            rules={{ required: { value: true, message: "Required" } }}
+            render={({ field }) => {
+              return (
+                <Select
+                  defaultValue={""}
+                  className={cn(errors.name && "border-destructive")}
+                  onValueChange={field.onChange}
+                  data={materials}
+                />
+              );
+            }}
           />
         </FormWrapper>
 
