@@ -18,7 +18,9 @@ export function Table({}) {
   const density = searchParams.get("density");
   const boundingBox = searchParams.get("boundingBox");
   const splittedBoundingBox = boundingBox.split(",");
+  const volume = searchParams.get("volume");
 
+  console.log(volume);
   // Calculate total price
   const findTotalAmount = () => {
     const consumables =
@@ -101,6 +103,9 @@ export function Table({}) {
         <span className="text-sm font-bold block">
           Mass:
           <span className="font-medium">{parseFloat(mass).toFixed(2)}</span>
+        </span>
+        <span className="text-sm font-bold block">
+          Volume: <span className="font-medium">{parseFloat(volume).toFixed(2)}</span>
         </span>
         <span className="text-sm">
           <p className="font-bold">Bounding Box:</p>

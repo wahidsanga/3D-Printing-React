@@ -36,7 +36,7 @@ export function PrintingForm() {
       .then((res) => {
         const result = res.data;
         history(
-          `/result?name=${result.name}&density=${data.density}&mass=${result.stl.weight}&height=${result?.stl?.boundingBox[2]}&boundingBox=${result.stl.boundingBox}`
+          `/result?name=${result.name}&density=${data.density}&mass=${result.stl.weight}&height=${result?.stl?.boundingBox[2]}&boundingBox=${result.stl.boundingBox}&volume=${result.stl.volume}`
         );
       })
       .finally(() => setIsLoading(false));
