@@ -45,14 +45,14 @@ export function PrintingForm() {
   const onUpload = async (data) => {
     setFile(data);
   };
-
+//Formwrapper is useful for styling and structuring forms in a consistent way within the application.
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-[350px] min-w-[200px]">
       <div className="grid gap-2">
         <FormWrapper>
           <Upload onUpload={onUpload} label="Upload your STL file here" />
         </FormWrapper>
-    //Formwrapper is useful for styling and structuring forms in a consistent way within the application.
+    
 
         <FormWrapper>
           <Label htmlFor="name" label="Name" />
