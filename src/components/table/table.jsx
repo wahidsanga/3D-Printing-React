@@ -13,6 +13,7 @@ export function Table({}) {
   const [formula, setFormula] = useState(0);
 
   const name = searchParams.get("name");
+  const email = searchParams.get("email");
   const mass = searchParams.get("mass");
   const height = searchParams.get("height");
   const density = searchParams.get("density");
@@ -33,7 +34,10 @@ export function Table({}) {
 
     const total = consumables + equipment + rawMaterials + labor;
 
-    return total;
+    const ltotal = total - (total * 0.1);
+    const htotal = total + (total * 0.1);
+    const final = `${ltotal.toFixed(0)} ~ ${htotal.toFixed(0)}`;
+    return final;
   };
 
   useEffect(() => {
@@ -50,9 +54,7 @@ export function Table({}) {
     }
   }, [formula]);
 
-  const handleFormulaChange = (e) => {
-    setFormula(eval(e.target.value));
-  };
+  
 
   const data = [
     {
@@ -84,18 +86,24 @@ export function Table({}) {
   return (
     <>
       <DashboardHeader className="mb-2" heading={"Results"} back />
-      <Input
-        className="mb-2 w-52"
-        placeholder="Edit Formula"
-        onChange={handleFormulaChange}
-      />
       <DataTable columns={columns} data={data} />
       <p className="text-md text-muted-foreground my-2 text-end mr-4">
-        Total: ${findTotalAmount().toFixed(2)}
+        Total: ${findTotalAmount()}
       </p>
+      <div className="text-center text-xs text-muted-foreground">
+        <p className="inline text-destructive">{pricesAndQuantity.disclaimer1}</p>
+      </div>
+      {email.includes("@griffith") && (
+      <div className="text-center text-xs text-muted-foreground">
+        <p className="inline text-destructive">{pricesAndQuantity.disclaimer2}</p>
+      </div>
+      )}
       <div className="place-self-end border p-2 rounded-sm bg-secondary my-2 grid gap-1">
         <span className="text-sm font-bold block">
           Customer Name: <span className="font-medium">{name}</span>
+        </span>
+        <span className="text-sm font-bold block">
+          Email: <span className="font-medium">{email}</span>
         </span>
         <span className="text-sm font-bold block">
           Printer Name: <span className="font-medium">{info?.printerName}</span>
@@ -114,10 +122,7 @@ export function Table({}) {
           <p>Height: {parseFloat(splittedBoundingBox[2]).toFixed(2)}</p>
         </span>
       </div>
-      <div className="text-center text-xs text-muted-foreground">
-        <p className="inline text-destructive">Disclaimer</p>: This is just an
-        estimated cost, the actual cost might fluctuate
-      </div>
+      
     </>
   );
 }

@@ -14,12 +14,12 @@ export const columns = [
   },
   {
     header: "Unit Price",
-    cell: ({ row }) => <p>{row.original.unitPrice}</p>,
+    cell: ({ row }) => <p>${row.original.unitPrice}</p>,
   },
   {
     header: "Total",
     cell: ({ row }) => (
-      <p>
+      <p>$
         {(
           Number(parseFloat(row.original.quantity).toFixed(2)) *
           Number(row.original.unitPrice)

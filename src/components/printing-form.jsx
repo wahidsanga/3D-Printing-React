@@ -36,7 +36,7 @@ export function PrintingForm() {
       .then((res) => {
         const result = res.data;
         history(
-          `/result?name=${result.name}&density=${data.density}&mass=${result.stl.weight}&height=${result?.stl?.boundingBox[2]}&boundingBox=${result.stl.boundingBox}&volume=${result.stl.volume}`
+          `/result?name=${result.name}&email=${data.email}&density=${data.density}&mass=${result.stl.weight}&height=${result?.stl?.boundingBox[2]}&boundingBox=${result.stl.boundingBox}&volume=${result.stl.volume}`
         );
       })
       .finally(() => setIsLoading(false));
@@ -50,8 +50,9 @@ export function PrintingForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="w-[350px] min-w-[200px]">
       <div className="grid gap-2">
         <FormWrapper>
-          <Upload onUpload={onUpload} label="Upload" />
+          <Upload onUpload={onUpload} label="Upload your STL file here" />
         </FormWrapper>
+    //Formwrapper is useful for styling and structuring forms in a consistent way within the application.
 
         <FormWrapper>
           <Label htmlFor="name" label="Name" />
@@ -68,6 +69,23 @@ export function PrintingForm() {
               },
             })}
           />
+           <Label htmlFor="email" label="Email Address" />
+          <Input
+            id="email"
+            className={cn(errors.email && "border-destructive")}
+            type="email" // Use type="email" for email input
+            placeholder="Email Address"
+            autoCorrect="off"
+            {...register("email", {
+              required: {
+                value: true,
+                message: "Required",
+              },
+            })}
+          />
+          {errors.email && (
+            <span className="text-destructive">{errors.email.message}</span>
+          )}
         </FormWrapper>
 
         <FormWrapper>

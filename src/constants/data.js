@@ -26,6 +26,15 @@ export const materials = [
       materialUnitPrice: 0.3,
       printerName: "Metal Printer",
     },
+    {
+        id: 4,
+        value: "7.86",
+        name: "mud",
+        formula: 1.2,
+        printerUnitPrice: 40,
+        materialUnitPrice: 0.3,
+        printerName: "con Printer",
+      },
   ];
   
   export const pricesAndQuantity = {
@@ -33,5 +42,8 @@ export const materials = [
     consumablesPrice: 1,
     labourQuantity: 1.5,
     labourPrice: 20,
+    disclaimer1: "This is just an estimated cost, the actual cost might fluctuate",
+    disclaimer2: "Based on your email address you might be eligible for an academic or student discount, please contact ADaPT’s technical staff members directly for additional information."
   };
+
   
