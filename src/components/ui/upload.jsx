@@ -54,7 +54,7 @@ const MultiUpload = ({ onUpload, defaultValues, label }) => {
         toast.success("Uploaded"); // Display success message
         setPreviousFiles(res.data.files); // Update previousFiles with uploaded files
       } catch (error) {
-        toast.error("Something went wrong!"); // Display error message
+        toast.error("Only STL file will be uploaded!"); // Display error message
       } finally {
         setIsLoading(false); // Set loading indicator to false after the request is complete
       }

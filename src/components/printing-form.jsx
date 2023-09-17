@@ -1,6 +1,8 @@
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import toast from "react-hot-toast";
 
 import { Icons } from "./icons";
 import { buttonVariants } from "./ui/button";
@@ -16,6 +18,7 @@ import { materials } from "../constants/data";
 export function PrintingForm() {
   const form = useForm({});
   const [file, setFile] = useState("");
+  const [recaptchaKey, setRecaptchaKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const history = useNavigate();
 
@@ -27,32 +30,39 @@ export function PrintingForm() {
   } = form;
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
-    await axios
-      .post(import.meta.env.VITE_API_BASE_URL + "/api/calculate", {
-        ...data,
-        file,
+    const result = await axios
+      .post(import.meta.env.VITE_API_BASE_URL + "/api/verify", {
+        token: recaptchaKey,
       })
-      .then((res) => {
-        const result = res.data;
-        history(
-          `/result?name=${result.name}&email=${data.email}&density=${data.density}&mass=${result.stl.weight}&height=${result?.stl?.boundingBox[2]}&boundingBox=${result.stl.boundingBox}&volume=${result.stl.volume}`
-        );
-      })
-      .finally(() => setIsLoading(false));
+      .catch(() => toast.error("Captch verification failed"));
+
+    if (result.data.status) {
+      setIsLoading(true);
+      return await axios
+        .post(import.meta.env.VITE_API_BASE_URL + "/api/calculate", {
+          ...data,
+          file,
+        })
+        .then((res) => {
+          const result = res.data;
+          history(
+            `/result?name=${result.name}&email=${data.email}&density=${data.density}&mass=${result.stl.weight}&height=${result?.stl?.boundingBox[2]}&boundingBox=${result.stl.boundingBox}&volume=${result.stl.volume}`
+          );
+        })
+        .finally(() => setIsLoading(false));
+    }
   };
 
   const onUpload = async (data) => {
     setFile(data);
   };
-//Formwrapper is useful for styling and structuring forms in a consistent way within the application.
+  //Formwrapper is useful for styling and structuring forms in a consistent way within the application.
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-[350px] min-w-[200px]">
       <div className="grid gap-2">
         <FormWrapper>
           <Upload onUpload={onUpload} label="Upload your STL file here" />
         </FormWrapper>
-    
 
         <FormWrapper>
           <Label htmlFor="name" label="Name" />
@@ -69,7 +79,7 @@ export function PrintingForm() {
               },
             })}
           />
-           <Label htmlFor="email" label="Email Address" />
+          <Label htmlFor="email" label="Email Address" />
           <Input
             id="email"
             className={cn(errors.email && "border-destructive")}
@@ -104,6 +114,13 @@ export function PrintingForm() {
                 />
               );
             }}
+          />
+        </FormWrapper>
+
+        <FormWrapper>
+          <ReCAPTCHA
+            sitekey="6LeDCw8oAAAAAHQUbfe1wa93F7FQBROZ6LhrMPDW"
+            onChange={(value) => setRecaptchaKey(value)}
           />
         </FormWrapper>
 
