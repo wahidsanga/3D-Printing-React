@@ -21,6 +21,7 @@ export function PrintingForm() {
   const [recaptchaKey, setRecaptchaKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const history = useNavigate();
+  // const [isSTLUploaded, setIsSTLUploaded] = useState(false);
 
   const {
     register,
@@ -30,6 +31,11 @@ export function PrintingForm() {
   } = form;
 
   const onSubmit = async (data) => {
+    if (!file) {
+      toast.error("No file added yet");
+      return;
+    }
+
     const result = await axios
       .post(import.meta.env.VITE_API_BASE_URL + "/api/verify", {
         token: recaptchaKey,
@@ -55,6 +61,7 @@ export function PrintingForm() {
 
   const onUpload = async (data) => {
     setFile(data);
+    // setIsSTLUploaded(true);
   };
   //Formwrapper is useful for styling and structuring forms in a consistent way within the application.
   return (
@@ -124,6 +131,15 @@ export function PrintingForm() {
           />
         </FormWrapper>
 
+        {/* {isSTLUploaded && (
+          <FormWrapper>
+            <ReCAPTCHA
+              sitekey="6LeDCw8oAAAAAHQUbfe1wa93F7FQBROZ6LhrMPDW"
+              onChange={(value) => setRecaptchaKey(value)}
+            />
+          </FormWrapper>
+        )} */}
+
         <button
           disabled={isLoading}
           className={cn(
@@ -136,6 +152,19 @@ export function PrintingForm() {
           />
           Submit
         </button>
+
+        {/* <button
+          disabled={!isSTLUploaded || isLoading}
+          className={cn(
+            buttonVariants({}),
+            "mt-2 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          )}
+        >
+          <Icons.spinner
+            className={cn("mr-2 hidden", isLoading && "block animate-spin")}
+          />
+          Submit
+        </button> */}
       </div>
     </form>
   );
