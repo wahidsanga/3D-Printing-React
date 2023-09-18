@@ -131,15 +131,6 @@ export function PrintingForm() {
           />
         </FormWrapper>
 
-        {/* {isSTLUploaded && (
-          <FormWrapper>
-            <ReCAPTCHA
-              sitekey="6LeDCw8oAAAAAHQUbfe1wa93F7FQBROZ6LhrMPDW"
-              onChange={(value) => setRecaptchaKey(value)}
-            />
-          </FormWrapper>
-        )} */}
-
         <button
           disabled={isLoading}
           className={cn(
@@ -153,18 +144,7 @@ export function PrintingForm() {
           Submit
         </button>
 
-        {/* <button
-          disabled={!isSTLUploaded || isLoading}
-          className={cn(
-            buttonVariants({}),
-            "mt-2 disabled:bg-gray-500 disabled:cursor-not-allowed"
-          )}
-        >
-          <Icons.spinner
-            className={cn("mr-2 hidden", isLoading && "block animate-spin")}
-          />
-          Submit
-        </button> */}
+        
       </div>
     </form>
   );
