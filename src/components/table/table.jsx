@@ -36,7 +36,7 @@ export function Table({}) {
 
     const ltotal = total - (total * 0.1);
     const htotal = total + (total * 0.1);
-    const final = `${ltotal.toFixed(0)} ~ ${htotal.toFixed(0)}`;
+    const final = `$${ltotal.toFixed(0)} ~ $${htotal.toFixed(0)}`;
     return final;
   };
 
@@ -87,48 +87,92 @@ export function Table({}) {
     <>
       <DashboardHeader className="mb-2" heading={"Results"} back />
 
-      <div className="place-self-end border p-2 rounded-sm bg-secondary my-2 grid gap-1">
-        <span className="text-sm font-bold block">
-          Customer Name: <span className="font-medium">{name}</span>
-        </span>
-        <span className="text-sm font-bold block">
-          Email: <span className="font-medium">{email}</span>
-        </span>
-        <span className="text-sm font-bold block">
-          Printer Name: <span className="font-medium">{info?.printerName}</span>
-        </span>
-        <span className="text-sm font-bold block">
-          Mass:
+      <div className="flex justify-center">
+  <table className="border border-black w-full">
+    
+    <tbody>
+      <tr>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          Customer Name
+        </td>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          <span className="font-medium">{name}</span>
+        </td>
+      </tr>
+      <tr>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          Email Address
+        </td>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          <span className="font-medium">{email}</span>
+        </td>
+      </tr>
+      <tr>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          Mass of product
+        </td>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
           <span className="font-medium">{parseFloat(mass).toFixed(2)} grams</span>
-        </span>
-        <span className="text-sm font-bold block">
-          Volume: <span className="font-medium">{parseFloat(volume).toFixed(2)} cubic centimeter</span>
-        </span>
-        <span className="text-sm">
-          <p className="font-bold">Bounding Box Dimensions:</p>
-          <p>Length: {parseFloat(splittedBoundingBox[0]).toFixed(2)} cm</p>
-          <p>Width: {parseFloat(splittedBoundingBox[1]).toFixed(2)} cm</p>
-          <p>Height: {parseFloat(splittedBoundingBox[2]).toFixed(2)} cm</p>
-        </span>
-        <span className="text-sm font-bold block">
-          Estimated cost range(AUD) for 3D printing: 
-        </span>
-        <span className="font-medium">{findTotalAmount()}</span>
-      </div>
-      <div className="text-center text-xs text-muted-foreground">
-        <p className="inline text-destructive">{pricesAndQuantity.disclaimer1}</p>
-      </div>
-      {email.includes("@griffith") && (
-      <div className="text-center text-xs text-muted-foreground">
+        </td>
+      </tr>
+      <tr>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          Volume 
+        </td>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          <span className="font-medium">{parseFloat(volume).toFixed(2)} cubic centimeter</span>
+        </td>
+      </tr>
+      <tr>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          Bounding Box Dimensions
+        </td>
+        <td className="border border-black p-2 rounded-sm bg-secondary">
+          <span className="font-bold">Length:</span>{" "}
+          <span className="font-medium">
+            {parseFloat(splittedBoundingBox[0]).toFixed(2)} cm
+          </span>
+          <br />
+          <span className="font-bold">Width:</span>{" "}
+          <span className="font-medium">
+            {parseFloat(splittedBoundingBox[1]).toFixed(2)} cm
+          </span>
+          <br />
+          <span className="font-bold">Height:</span>{" "}
+          <span className="font-medium">
+            {parseFloat(splittedBoundingBox[2]).toFixed(2)} cm
+          </span>
+        </td>
+      </tr>
+      <tr>
+  <td className="border border-black p-2 rounded-sm bg-secondary">
+    Estimated cost range for 3D printing
+  </td>
+  <td className="border border-black p-2 rounded-sm bg-secondary">
+    <span className="font-medium">{findTotalAmount()}</span>
+    <div className="text-center text-xs text-muted-foreground inline ml-2">
+      <p className="inline text-destructive">{pricesAndQuantity.disclaimer1}</p>
+    </div>
+    {email.includes("@griffith") && (
+      <div className="text-center text-xs text-muted-foreground inline ml-2">
         <p className="inline text-destructive">{pricesAndQuantity.disclaimer2}</p>
       </div>
-      )}
-      <DataTable columns={columns} data={data} />
-      <p className="text-md text-muted-foreground my-2 text-end mr-4">
-      <span className="text-sm font-bold block">
-      Total: ${findTotalAmount()}
-        </span>     
-      </p>
+    )}
+  </td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+      {/* Table Heading */}
+      <div className="text-center border p-2 rounded-sm bg-secondary my-2 grid gap-1">
+        <span className="text-md font-bold block">Estimated cost break-down</span>
+      </div>
+
+      <DataTable columns={columns} data={data} customFooterRow={findTotalAmount()} />
+      
       
     </>
   );

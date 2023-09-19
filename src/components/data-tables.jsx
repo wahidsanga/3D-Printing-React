@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "./ui/table";
 
-export function DataTable({ columns, data }) {
+export function DataTable({ columns, data, customFooterRow }) {
   const table = useReactTable({
     data,
     columns,
@@ -98,6 +98,16 @@ export function DataTable({ columns, data }) {
               ))}
             </tr>
           ))}
+
+{/* Add a custom footer row for the "Total" */}
+          <tr>
+            <td colSpan={columns.length - 1} style={{ textAlign: 'right', fontWeight: 'bold', color: 'red'}}>
+              Total : 
+            </td>
+            <td className="text-right">{customFooterRow}</td>
+          </tr>
+
+
         </TableFooter>
       </Table>
     </div>
