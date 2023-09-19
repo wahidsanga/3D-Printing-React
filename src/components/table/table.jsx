@@ -86,18 +86,7 @@ export function Table({}) {
   return (
     <>
       <DashboardHeader className="mb-2" heading={"Results"} back />
-      <DataTable columns={columns} data={data} />
-      <p className="text-md text-muted-foreground my-2 text-end mr-4">
-        Total: ${findTotalAmount()}
-      </p>
-      <div className="text-center text-xs text-muted-foreground">
-        <p className="inline text-destructive">{pricesAndQuantity.disclaimer1}</p>
-      </div>
-      {email.includes("@griffith") && (
-      <div className="text-center text-xs text-muted-foreground">
-        <p className="inline text-destructive">{pricesAndQuantity.disclaimer2}</p>
-      </div>
-      )}
+
       <div className="place-self-end border p-2 rounded-sm bg-secondary my-2 grid gap-1">
         <span className="text-sm font-bold block">
           Customer Name: <span className="font-medium">{name}</span>
@@ -110,18 +99,36 @@ export function Table({}) {
         </span>
         <span className="text-sm font-bold block">
           Mass:
-          <span className="font-medium">{parseFloat(mass).toFixed(2)}</span>
+          <span className="font-medium">{parseFloat(mass).toFixed(2)} grams</span>
         </span>
         <span className="text-sm font-bold block">
-          Volume: <span className="font-medium">{parseFloat(volume).toFixed(2)}</span>
+          Volume: <span className="font-medium">{parseFloat(volume).toFixed(2)} cubic centimeter</span>
         </span>
         <span className="text-sm">
-          <p className="font-bold">Bounding Box:</p>
-          <p>Length: {parseFloat(splittedBoundingBox[0]).toFixed(2)}</p>
-          <p>Width: {parseFloat(splittedBoundingBox[1]).toFixed(2)}</p>
-          <p>Height: {parseFloat(splittedBoundingBox[2]).toFixed(2)}</p>
+          <p className="font-bold">Bounding Box Dimensions:</p>
+          <p>Length: {parseFloat(splittedBoundingBox[0]).toFixed(2)} cm</p>
+          <p>Width: {parseFloat(splittedBoundingBox[1]).toFixed(2)} cm</p>
+          <p>Height: {parseFloat(splittedBoundingBox[2]).toFixed(2)} cm</p>
         </span>
+        <span className="text-sm font-bold block">
+          Estimated cost range(AUD) for 3D printing: 
+        </span>
+        <span className="font-medium">{findTotalAmount()}</span>
       </div>
+      <div className="text-center text-xs text-muted-foreground">
+        <p className="inline text-destructive">{pricesAndQuantity.disclaimer1}</p>
+      </div>
+      {email.includes("@griffith") && (
+      <div className="text-center text-xs text-muted-foreground">
+        <p className="inline text-destructive">{pricesAndQuantity.disclaimer2}</p>
+      </div>
+      )}
+      <DataTable columns={columns} data={data} />
+      <p className="text-md text-muted-foreground my-2 text-end mr-4">
+      <span className="text-sm font-bold block">
+      Total: ${findTotalAmount()}
+        </span>     
+      </p>
       
     </>
   );
