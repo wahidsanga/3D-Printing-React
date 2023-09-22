@@ -87,6 +87,15 @@ export function Table({}) {
     <>
       <DashboardHeader className="mb-2" heading={"Results"} back />
 
+  
+
+      {/* Table Heading */}
+      <div className="text-center border p-2 rounded-sm bg-secondary my-2 grid gap-1">
+        <span className="text-md font-bold block">Estimated cost break-down</span>
+      </div>
+
+      <DataTable columns={columns} data={data} customFooterRow={findTotalAmount()} />
+      
       <div className="flex justify-center">
   <table className="border border-black w-full">
     
@@ -105,6 +114,11 @@ export function Table({}) {
         </td>
         <td className="border border-black p-2 rounded-sm bg-secondary">
           <span className="font-medium">{email}</span>
+          {email.includes("@griffith") && (
+      <div className="text-center text-xs text-muted-foreground inline ml-2">
+        <p className="inline text-destructive">{pricesAndQuantity.disclaimer2}</p>
+      </div>
+    )}
         </td>
       </tr>
       <tr>
@@ -153,11 +167,7 @@ export function Table({}) {
     <div className="text-center text-xs text-muted-foreground inline ml-2">
       <p className="inline text-destructive">{pricesAndQuantity.disclaimer1}</p>
     </div>
-    {email.includes("@griffith") && (
-      <div className="text-center text-xs text-muted-foreground inline ml-2">
-        <p className="inline text-destructive">{pricesAndQuantity.disclaimer2}</p>
-      </div>
-    )}
+   
   </td>
 </tr>
 
@@ -165,15 +175,6 @@ export function Table({}) {
   </table>
 </div>
 
-
-      {/* Table Heading */}
-      <div className="text-center border p-2 rounded-sm bg-secondary my-2 grid gap-1">
-        <span className="text-md font-bold block">Estimated cost break-down</span>
-      </div>
-
-      <DataTable columns={columns} data={data} customFooterRow={findTotalAmount()} />
-      
-      
     </>
   );
 }
