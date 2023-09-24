@@ -136,7 +136,7 @@ export function Table({}) {
                 Volume 
               </td>
               <td className="border border-black p-2 rounded-sm bg-secondary">
-                <span className="font-medium">{parseFloat(volume).toFixed(2)} cubic millimeter</span>
+                <span className="font-medium">{parseFloat(volume).toFixed(2)} cubic centimeter</span>
               </td>
             </tr>
             <tr>
