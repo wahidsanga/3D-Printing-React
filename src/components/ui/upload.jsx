@@ -1,18 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { useCallback, useEffect, useState } from "react"; // Import necessary hooks from React
+import { useDropzone } from "react-dropzone"; // Import the useDropzone hook for handling file drops
+import axios from "axios"; // Import axios for making HTTP requests
+import toast from "react-hot-toast"; // Import the toast notification library for displaying messages
 
-import { cn } from "../../lib/utils";
-import { buttonVariants } from "./button";
-import { Label } from "./label";
-import { Icons } from "../icons";
+import { cn } from "../../lib/utils"; // Import the "cn" utility function for CSS class names
+import { buttonVariants } from "./button"; // Import the "buttonVariants" function for styling buttons
+import { Label } from "./label"; // Import the "Label" component for rendering labels
+import { Icons } from "../icons"; // Import the "Icons" component for rendering icons
 
 // MultiUpload component takes props including a callback for uploading, default values, and a label
 const MultiUpload = ({ onUpload, defaultValues, label }) => {
   // State to manage previous and current uploaded files, and loading indicator
   const [previousFiles, setPreviousFiles] = useState();
-  //const [myFiles, setMyFiles] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   // When defaultValues prop changes, update previousFiles
@@ -28,12 +27,10 @@ const MultiUpload = ({ onUpload, defaultValues, label }) => {
   // Callback function to handle file drop
   const onDrop = useCallback(
     async (acceptedFiles) => {
-      //setMyFiles(myFiles); // This line doesn't seem to serve a purpose
-
       const formData = new FormData();
 
       // Append each accepted file to formData
-      acceptedFiles.map((image, i) => {
+      acceptedFiles.forEach((image, i) => {
         formData.append("file", image);
       });
 
@@ -54,12 +51,12 @@ const MultiUpload = ({ onUpload, defaultValues, label }) => {
         toast.success("Uploaded"); // Display success message
         setPreviousFiles(res.data.files); // Update previousFiles with uploaded files
       } catch (error) {
-        toast.error("Only STL file will be uploaded!"); // Display error message
+        toast.error("Only STL files will be uploaded!"); // Display error message
       } finally {
         setIsLoading(false); // Set loading indicator to false after the request is complete
       }
     },
-    //[myFiles]
+    []
   );
 
   // Initialize the Dropzone functionality
@@ -75,7 +72,6 @@ const MultiUpload = ({ onUpload, defaultValues, label }) => {
           <input {...getInputProps()} />
 
           <div className="flex gap-2 items-center mb-2">
-            
             <button
               type="button"
               onClick={() => onUpload(previousFiles)}
@@ -113,4 +109,5 @@ const MultiUpload = ({ onUpload, defaultValues, label }) => {
   );
 };
 
+// Export the MultiUpload component as "Upload"
 export { MultiUpload as Upload };

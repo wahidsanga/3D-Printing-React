@@ -1,3 +1,4 @@
+// Import various icons as React components from the "lucide-react" library.
 import {
   BedDouble,
   ArrowRight,
@@ -52,56 +53,57 @@ import {
   MessageCircle,
 } from "lucide-react";
 
+// Create an object named "Icons" to map icon names to their corresponding components.
 export const Icons = {
-  user: User,
-  room: BedDouble,
-  logo: Home,
-  arrowright: ArrowRight,
-  category: List,
-  gallery: Film,
-  add: Plus,
-  down: ChevronDown,
-  up: ChevronUp,
-  check: Check,
-  delete: Trash,
-  menu: MoreVertical,
-  edit: Edit,
-  left: ChevronLeft,
-  right: ChevronRight,
-  spinner: Loader2,
-  upload: Upload,
-  save: Save,
-  tags: Tag,
-  setting: Settings,
-  booking: CalendarDays,
-  phone: PhoneCall,
-  arrowRight: ArrowRightIcon,
-  arrowDown: ArrowDownIcon,
-  play: Play,
-  mail: Mail,
-  mapPin: MapPin,
-  quote: Quote,
-  facebook: Facebook,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  instagram: Instagram,
-  youtube: Youtube,
-  airConditioner: AirVent,
-  wifi: Wifi,
-  breakfast: EggFried,
-  towel: RectangleVertical,
-  swimming: Waves,
-  oven: Microwave,
-  shower: ShowerHead,
-  bathTub: Bath,
-  refrigerator: Refrigerator,
-  tv: Tv,
-  testimonials: Scroll,
-  hamburger: Menu,
-  close: X,
-  team: Users2,
-  banner: Image,
-  services: Wrench,
-  arrowUp: ChevronUpIcon,
-  message: MessageCircle,
+  user: User,                 // User icon
+  room: BedDouble,            // BedDouble icon
+  logo: Home,                 // Home icon
+  arrowright: ArrowRight,     // ArrowRight icon
+  category: List,             // List icon
+  gallery: Film,              // Film icon
+  add: Plus,                  // Plus icon
+  down: ChevronDown,          // ChevronDown icon
+  up: ChevronUp,              // ChevronUp icon
+  check: Check,               // Check icon
+  delete: Trash,              // Trash icon
+  menu: MoreVertical,         // MoreVertical icon
+  edit: Edit,                 // Edit icon
+  left: ChevronLeft,          // ChevronLeft icon
+  right: ChevronRight,        // ChevronRight icon
+  spinner: Loader2,           // Loader2 icon
+  upload: Upload,             // Upload icon
+  save: Save,                 // Save icon
+  tags: Tag,                  // Tag icon
+  setting: Settings,          // Settings icon
+  booking: CalendarDays,      // CalendarDays icon
+  phone: PhoneCall,           // PhoneCall icon
+  arrowRight: ArrowRightIcon, // ArrowRightIcon icon
+  arrowDown: ArrowDownIcon,   // ArrowDownIcon icon
+  play: Play,                 // Play icon
+  mail: Mail,                 // Mail icon
+  mapPin: MapPin,             // MapPin icon
+  quote: Quote,               // Quote icon
+  facebook: Facebook,         // Facebook icon
+  linkedin: Linkedin,         // Linkedin icon
+  twitter: Twitter,           // Twitter icon
+  instagram: Instagram,       // Instagram icon
+  youtube: Youtube,           // Youtube icon
+  airConditioner: AirVent,    // AirVent icon
+  wifi: Wifi,                 // Wifi icon
+  breakfast: EggFried,        // EggFried icon
+  towel: RectangleVertical,   // RectangleVertical icon
+  swimming: Waves,            // Waves icon
+  oven: Microwave,            // Microwave icon
+  shower: ShowerHead,         // ShowerHead icon
+  bathTub: Bath,              // Bath icon
+  refrigerator: Refrigerator, // Refrigerator icon
+  tv: Tv,                     // Tv icon
+  testimonials: Scroll,      // Scroll icon
+  hamburger: Menu,           // Menu icon
+  close: X,                  // X icon
+  team: Users2,              // Users2 icon
+  banner: Image,             // Image icon
+  services: Wrench,          // Wrench icon
+  arrowUp: ChevronUpIcon,    // ChevronUpIcon icon
+  message: MessageCircle,    // MessageCircle icon
 };
