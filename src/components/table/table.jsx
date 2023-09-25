@@ -29,7 +29,7 @@ export function Table({}) {
     const consumables =
       pricesAndQuantity.consumablesQuantity +
       pricesAndQuantity.consumablesPrice;
-    const equipment = info?.formula * height * height;
+    const equipment = info?.formula * height * info?.printerUnitPrice;
     const rawMaterials = mass * info?.materialUnitPrice;
     const labor =
       pricesAndQuantity.labourQuantity * pricesAndQuantity.labourPrice;
@@ -68,7 +68,7 @@ export function Table({}) {
       name: `3D Printer - ${info?.printerName} (hrs)`,
       subtext: "Equipment",
       quantity: formula * height,
-      unitPrice: height,
+      unitPrice: info?.printerUnitPrices,
     },
     {
       name: `${info?.name} (g)`,
