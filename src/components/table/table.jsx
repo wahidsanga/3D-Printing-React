@@ -27,9 +27,9 @@ export function Table({}) {
   // Calculate total price of 3D printing and display its as a +-10% range in string format
   const findTotalAmount = () => {
     const consumables =
-      pricesAndQuantity.consumablesQuantity +
+      pricesAndQuantity.consumablesQuantity *
       pricesAndQuantity.consumablesPrice;
-    const equipment = info?.formula * height * height;
+    const equipment = info?.formula * height * info?.printerUnitPrice;
     const rawMaterials = mass * info?.materialUnitPrice;
     const labor =
       pricesAndQuantity.labourQuantity * pricesAndQuantity.labourPrice;
@@ -68,7 +68,7 @@ export function Table({}) {
       name: `3D Printer - ${info?.printerName} (hrs)`,
       subtext: "Equipment",
       quantity: formula * height,
-      unitPrice: height,
+      unitPrice: info?.printerUnitPrice,
     },
     {
       name: `${info?.name} (g)`,
