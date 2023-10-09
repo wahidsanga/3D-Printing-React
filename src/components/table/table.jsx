@@ -68,7 +68,9 @@ export function Table({}) {
       name: `3D Printer - ${info?.printerName} (hrs)`,
       subtext: "Equipment",
       quantity: formula * height,
+<<<<<<< HEAD
       unitPrice: info?.printerUnitPrice,
+
     },
     {
       name: `${info?.name} (g)`,
